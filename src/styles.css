@@ -52,8 +52,20 @@ ul {
   padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
 .section {
   padding: 6rem 0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
 }
 
 .text-center {
@@ -292,6 +304,11 @@ ul {
   .hero-content p { font-size: 1.125rem; }
 }
 
+@media (max-width: 576px) {
+  .hero-content h1 { font-size: 2rem; }
+  .hero-content p { font-size: 1rem; }
+}
+
 /* About Section */
 .about {
   background-color: var(--white);
@@ -381,6 +398,13 @@ ul {
 @media (max-width: 992px) {
   .about-content { grid-template-columns: 1fr; }
   .about-image { min-height: 300px; }
+}
+
+@media (max-width: 576px) {
+  .about-features { 
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+  }
 }
 
 /* Services Section */
@@ -802,6 +826,25 @@ textarea.form-control {
   .contact-wrapper { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 768px) {
+  .contact-info-panel, .contact-form-panel {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-info-panel, .contact-form-panel {
+    padding: 2rem 1rem;
+  }
+  .contact-detail-item {
+    gap: 1rem;
+  }
+  .contact-detail-item p,
+  .contact-detail-item h5 {
+    word-break: break-word;
+  }
+}
+
 /* Footer */
 .footer {
   background-color: var(--text-dark);
@@ -966,4 +1009,78 @@ textarea.form-control {
   .lightbox-nav-btn.next { right: 10px; }
   .lightbox-nav-btn:hover { transform: translateY(-50%) scale(1.1); }
   .lightbox-content-wrapper { margin: 0 40px; }
+}
+
+/* Splash Screen - Apple/Steve Jobs Style */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  background-color: var(--primary-dark);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: splashFadeOut 1.2s cubic-bezier(0.4, 0, 0.2, 1) 3.5s forwards;
+}
+
+.splash-logo-mask {
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  aspect-ratio: 323 / 52.5;
+  -webkit-mask-image: url('/PremiumPoolLogo.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('/PremiumPoolLogo.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background-color: rgba(255, 255, 255, 0); /* Start invisible */
+  overflow: hidden;
+  animation: appleFadeIn 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.splash-shine {
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgba(255,255,255,0.05) 30%, 
+    rgba(255,255,255,1) 50%, 
+    rgba(255,255,255,0.05) 70%, 
+    transparent 100%
+  );
+  animation: appleSweep 3.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes appleFadeIn {
+  0% { 
+    background-color: rgba(255, 255, 255, 0);
+    transform: scale(0.96); 
+    filter: blur(4px);
+  }
+  40% {
+    background-color: rgba(255, 255, 255, 0.15);
+    filter: blur(0px);
+  }
+  100% { 
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: scale(1.02); 
+    filter: blur(0px);
+  }
+}
+
+@keyframes appleSweep {
+  0% { left: -200%; }
+  100% { left: 100%; }
+}
+
+@keyframes splashFadeOut {
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
 }

@@ -28,6 +28,19 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const openLightbox = (index) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -60,6 +73,15 @@ function App() {
 
   return (
     <div className="app">
+      {/* Splash Screen */}
+      {showSplash && (
+        <div className="splash-screen">
+          <div className="splash-logo-mask">
+            <div className="splash-shine"></div>
+          </div>
+        </div>
+      )}
+
       {/* Navbar */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container">
