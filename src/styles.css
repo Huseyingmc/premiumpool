@@ -7,8 +7,9 @@
   --bg-light: #ffffff;
   --bg-light-blue: #f2f9ff;
   --white: #ffffff;
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-  --radius: 6px;
+  --font-main: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+  --radius: 0px; /* Keep sharp corners for corporate look */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -37,6 +38,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -52,7 +54,7 @@ ul {
 
 /* Utilities */
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -64,12 +66,12 @@ ul {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: 8rem 0; /* Increased for more corporate breathing room */
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 4rem 0;
+    padding: 5rem 0;
   }
 }
 
@@ -150,9 +152,9 @@ ul {
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background-color: var(--primary);
+  width: 150px;
+  height: 1px;
+  background-color: var(--text-dark);
 }
 
 .section-header p {
@@ -162,20 +164,28 @@ ul {
   margin: 0 auto;
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+  padding: 1.5rem 0; /* Taller padding for a luxury corporate look initially */
+}
+
+.navbar.scrolled {
+  padding: 1rem 0;
   background-color: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: var(--transition);
-  padding: 1rem 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .navbar .container {
+  max-width: 100%;
+  padding: 0 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,6 +199,12 @@ ul {
 .brand-logo {
   height: 40px;
   width: auto;
+  transition: var(--transition);
+  filter: brightness(0) invert(1); /* White logo initially */
+}
+
+.navbar.scrolled .brand-logo {
+  filter: none; /* Original colored logo on scroll */
 }
 
 .nav-links {
@@ -199,12 +215,17 @@ ul {
 
 .nav-links a {
   font-weight: 500;
-  color: var(--text-dark);
+  font-size: 0.9rem;
+  color: var(--white);
   transition: var(--transition);
   position: relative;
+  padding: 0.5rem 0;
   text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 1px;
+}
+
+.navbar.scrolled .nav-links a {
+  color: var(--text-dark);
 }
 
 .nav-links a::after {
@@ -231,11 +252,19 @@ ul {
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: var(--text-dark);
+  color: var(--white);
   cursor: pointer;
 }
 
+.navbar.scrolled .mobile-menu-btn {
+  color: var(--text-dark);
+}
+
 @media (max-width: 768px) {
+  .navbar .container {
+    padding: 0 1.5rem;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -246,6 +275,10 @@ ul {
     flex-direction: column;
     padding: 2rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-links a {
+    color: var(--text-dark); /* Always dark on mobile menu */
   }
 
   .nav-links.active {
@@ -360,6 +393,18 @@ ul {
   font-size: 2.5rem;
   color: var(--text-dark);
   margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.about-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  height: 1px;
+  background-color: var(--text-dark);
 }
 
 .about-text p {
@@ -554,6 +599,23 @@ ul {
   flex: 1;
 }
 
+.equipment-info h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.equipment-info h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  height: 1px;
+  background-color: var(--text-dark);
+}
+
 .equipment-visual {
   flex: 1;
   display: grid;
@@ -636,6 +698,18 @@ ul {
 .tech-text h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.tech-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  height: 1px;
+  background-color: var(--text-dark);
 }
 
 .tech-text p {
